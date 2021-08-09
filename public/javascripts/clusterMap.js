@@ -5,7 +5,7 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/light-v10',
     center: [121.023714, 23.946242],
     //usa: -103.59179687498357, 40.66995747013945
-    zoom: 3
+    zoom: 5
 });
 
 map.addControl(new mapboxgl.NavigationControl());
