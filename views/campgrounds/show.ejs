@@ -116,7 +116,7 @@
                     </div>
         </div>
     </div>
-
+    <!--
     <script>
         const mapToken = '<%-process.env.MAPBOX_TOKEN %>';
         const campground = '<%- JSON.stringify(campground) %>'
@@ -124,3 +124,27 @@
     </script>
 
     <script src='/javascripts/showPageMap.js'></script>
+    -->
+    
+
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN %>';
+        const camp= <%- JSON.stringify(campground) %>
+        
+        mapboxgl.accessToken = mapToken;
+        var map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: camp.geometry.coordinates, // starting position [lng, lat]
+            zoom: 8 // starting zoom
+        });
+
+        map.addControl(new mapboxgl.NavigationControl());
+        var marker = new mapboxgl.Marker()
+            .setLngLat(camp.geometry.coordinates)
+            .setPopup(
+            new mapboxgl.Popup({offset: 25})
+                .setHTML(   `<h4>${camp.title}</h4><p>${camp.location}</p>`)
+            )
+        .addTo(map);
+    </script>
